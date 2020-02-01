@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Lwjgl" />
+      </profile>
+    </annotationProcessing>
+<<<<<<< HEAD
+    <bytecodeTargetLevel target="8">
+      <module name="Lwjgl" target="8" />
+    </bytecodeTargetLevel>
+=======
+>>>>>>> 6d402a4291f567f5a80223be3095baf53cfc2d37
+  </component>
+</project>

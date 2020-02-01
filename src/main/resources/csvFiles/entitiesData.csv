@@ -1,0 +1,6 @@
+Name,Transform,Transparent,Cast shadow,Seen under water,Water reflective
+Player,"0, 0, 0, 10, 10, 10, 1",FALSE,TRUE,TRUE,TRUE
+Horse,"0, 0, 0, 10, 10, 10, 1",FALSE,TRUE,TRUE,TRUE
+Tree1,"0, 0, 0, 10, 10, 10, 1",FALSE,TRUE,TRUE,TRUE
+Tree2,"0, 0, 0, 10, 10, 10, 1",FALSE,TRUE,TRUE,TRUE
+Fern,"0, 0, 0, 10, 10, 10, 1",TRUE,FALSE,TRUE,FALSE

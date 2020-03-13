@@ -97,8 +97,8 @@ class GuiRenderer : Renderer2D<GuiObject>() {
     }
 
     companion object {
-        private const val VERT_FILE = "/tegui/render/GuiVertex.glsl"
-        private const val FRAG_FILE = "/tegui/render/GuiFragment.glsl"
+        private const val VERT_FILE = "/engine/tegui/render/GuiVertex.glsl"
+        private const val FRAG_FILE = "/engine/tegui/render/GuiFragment.glsl"
 
         @JvmStatic
         val instance: GuiRenderer = GuiRenderer()

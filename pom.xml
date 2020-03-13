@@ -8,7 +8,6 @@
     <artifactId>Lwjgl</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-<<<<<<< HEAD
     <properties>
         <kotlin.version>1.3.61</kotlin.version>
         <lwjgl.version>3.2.3</lwjgl.version>
@@ -96,13 +95,6 @@
                         <goals>
                             <goal>compile</goal>
                         </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <source>src/main/java</source>
-                                <source>src/main/myEngine</source>
-                                <source>src/main/Tegui</source>
-                            </sourceDirs>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>test-compile</id>
@@ -142,8 +134,5 @@
             </plugin>
         </plugins>
     </build>
-
-=======
->>>>>>> 6d402a4291f567f5a80223be3095baf53cfc2d37
 
 </project>

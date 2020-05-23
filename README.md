@@ -6,7 +6,7 @@ https://www.youtube.com/watch?v=OyHHbpGA1iE
 
 # Features
 
-Here are the main features of the engine:
+Here are some main features of the engine:
 
 ## Terrain & Water
 

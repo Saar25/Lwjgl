@@ -15,10 +15,17 @@ The engine provides many gui components to help you create a nice looking gui
 
 The gui components are easy to use and very flexible
 
+## Particle systems
+<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/Particles.png?raw=true" />
+
+With the particle placers and the particles components you are able to create a variety of different particle systems!
 
 ## Multisampling
-<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" style="width=300px" />
 
-<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true" style="width=300px"/>
+**Without multisampling:**
+<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" />
 
-Multisampling is available, completely built in
+**With multisampling:**
+<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true"/>
+
+Multisampling is available, it is completely built in the engine

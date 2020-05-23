@@ -17,8 +17,8 @@ The gui components are easy to use and very flexible
 
 
 ## Multisampling
-<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" style="maxwidth=40%" />
+<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" style="maxwidth=300px" />
 
-<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true" style="maxwidth=40%"/>
+<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true" style="maxwidth=300px"/>
 
 Multisampling is available, completely built in

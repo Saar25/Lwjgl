@@ -41,8 +41,8 @@ Current not available
 ## Multisampling
 
 <div style="display: flex; justify-content: space-between;">
-    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" width="50%"/>
-    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true" width="50%"/>
+    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" width="40%"/>
+    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true" width="40%"/>
 </div>
 
 Multisampling is available, it is completely built in the engine

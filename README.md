@@ -41,7 +41,9 @@ Current not available
 ## Multisampling
 
 <div style="display: flex; justify-content: space-between;">
+    **With:**
     <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" width="40%"/>
+    and **Without:**
     <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true" width="40%"/>
 </div>
 

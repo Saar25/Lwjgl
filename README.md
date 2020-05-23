@@ -10,9 +10,13 @@ Here are the main features of the engine:
 
 ## Terrain & Water
 
-<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/Amanecer.png?raw=true" />
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/Amanecer.png?raw=true" width="30%"/>
+    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/Terrain&Water.png?raw=true" width="30%"/>
+    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/Planet.png?raw=true" width="30%"/>
+</div>
 
-a
+Low-poly, high-poly, multitexturing, terrains, waters and planets...
 
 ## Gui
 
@@ -36,12 +40,9 @@ Current not available
 
 ## Multisampling
 
-**Without multisampling:**
-
-<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" />
-
-**With multisampling:**
-
-<img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true"/>
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithoutMultisampling.png?raw=true" width="50%"/>
+    <img src="https://github.com/Saar25/Lwjgl/blob/master/docs/WithMultisampling.png?raw=true" width="50%"/>
+</div>
 
 Multisampling is available, it is completely built in the engine

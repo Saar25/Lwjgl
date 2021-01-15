@@ -34,7 +34,7 @@ layout (location = 0) out vec4 f_colour;
 layout (location = 1) out vec4 f_normal;
 layout (location = 2) out vec4 f_position;
 
-uniform sampler2D texture;
+uniform sampler2D u_texture;
 uniform float specularPower;
 uniform Light lights[MAX_LIGHTS];
 uniform int lightsCount;
@@ -122,7 +122,7 @@ float calcShadowFactor(sampler2D shadowMap, vec4 shadowMapCoords) {
 }
 
 vec4 calculateColour() {
-    return sTexture(texture, v_texCoord);
+    return sTexture(u_texture, v_texCoord);
 }
 
 void main() {

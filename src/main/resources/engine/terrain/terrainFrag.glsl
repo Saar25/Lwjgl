@@ -51,7 +51,7 @@ in vec4 shadowMapCoords;
 
 out vec4 fragColour;
 
-uniform sampler2D texture;
+uniform sampler2D u_texture;
 uniform sampler2D shadowMap;
 uniform bool multiTexturing;
 uniform bool enableShadows;
@@ -110,7 +110,7 @@ vec3 calcFinalLights(Light[MAX_LIGHTS] light, int lightsCount,
 }
 
 vec4 calcTextureColour(float tiling) {
-    return sTexture(texture, outTexCoord * tiling);
+    return sTexture(u_texture, outTexCoord * tiling);
 }
 
 vec4 calcLowPolyColour(float height) {

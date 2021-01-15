@@ -83,7 +83,7 @@ class TerrainRenderer @Throws(Exception::class) constructor() : Renderer3D<Terra
                 return getContext().sun != null && getContext().sun.isEnabled
             }
         })
-        shadersProgram.addPerInstanceUniform(object : UniformTextureProperty<Terrain>("texture", 0) {
+        shadersProgram.addPerInstanceUniform(object : UniformTextureProperty<Terrain>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<Terrain>): ITexture? {
                 return state.instance.skin.texture
             }

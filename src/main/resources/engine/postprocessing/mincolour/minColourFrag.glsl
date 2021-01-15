@@ -10,11 +10,11 @@ out vec4 fragColour;
 
 in vec2 texCoord;
 
-uniform sampler2D texture;
+uniform sampler2D u_texture;
 uniform vec3 minColour;
 
 vec4 getColour() {
-    vec4 colour = sTexture(texture, texCoord);
+    vec4 colour = sTexture(u_texture, texCoord);
     bvec3 cmp = greaterThanEqual(colour.rgb, minColour);
     if (cmp == bvec3(true)) {
         return colour;

@@ -10,7 +10,7 @@ out vec3 fragColour;
 
 in vec2 texCoord;
 
-uniform sampler2D texture;
+uniform sampler2D u_texture;
 uniform vec2 center;
 uniform int samples;
 uniform float factor;
@@ -25,7 +25,7 @@ void main(void) {
     vec3 finalColour = vec3(0);
     for(int i = 0; i < samples; i++) {
         vec2 coords = clamp(texCoord + i * offset, 0, 1);
-        finalColour += sTexture(texture, coords).rgb / samples;
+        finalColour += sTexture(u_texture, coords).rgb / samples;
     }
     fragColour = finalColour;
 }

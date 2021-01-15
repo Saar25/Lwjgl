@@ -64,7 +64,7 @@ class GuiRenderer : Renderer2D<GuiObject>() {
                 return state.instance.style.backgroundColourAttribute.get().asIVec4()
             }
         })
-        shadersProgram.addPerInstanceUniform(object : UniformTextureProperty<GuiObject>("texture", 0) {
+        shadersProgram.addPerInstanceUniform(object : UniformTextureProperty<GuiObject>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<GuiObject>): ITexture? {
                 return state.instance.texture
             }

@@ -10,11 +10,11 @@ in vec2 texCoord;
 
 out float fragDepth;
 
-uniform sampler2D texture;
+uniform sampler2D u_texture;
 
 void main() {
 
-    if (sTexture(texture, texCoord).a < .1) {
+    if (sTexture(u_texture, texCoord).a < .1) {
         discard;
     }
 

@@ -33,7 +33,7 @@ class ParticleRenderer private constructor() : Renderer3D<ParticleSystem>() {
                 return state.instance.skin.textureRows
             }
         })
-        shaderProgram.addPerInstanceUniform(object : UniformTextureProperty<ParticleSystem>("texture", 0) {
+        shaderProgram.addPerInstanceUniform(object : UniformTextureProperty<ParticleSystem>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<ParticleSystem>): ITexture {
                 return state.instance.skin.texture
             }

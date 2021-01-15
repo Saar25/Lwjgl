@@ -10,7 +10,7 @@ import opengl.textures.ITexture
 class CelShading : AbstractPostProcessor(FRAG_FILE), PostProcessor {
 
     init {
-        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("texture", 0) {
+        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<RenderOutputData>): ITexture {
                 return state.instance.colour
             }

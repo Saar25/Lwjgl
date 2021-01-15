@@ -30,7 +30,7 @@ class ShadowsRenderer private constructor() : Renderer3D<Renderable>() {
                 return state.instance.skin.textureOffset
             }
         })
-        shaderProgram.addPerInstanceUniform(object : UniformTextureProperty<Renderable>("texture", 0) {
+        shaderProgram.addPerInstanceUniform(object : UniformTextureProperty<Renderable>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<Renderable>): ITexture {
                 return state.instance.skin.texture
             }

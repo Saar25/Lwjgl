@@ -10,7 +10,7 @@ out vec4 fragColour;
 
 in vec2 texCoord;
 
-uniform sampler2D texture;
+uniform sampler2D u_texture;
 uniform float radius2;
 uniform vec2 center;
 
@@ -23,7 +23,7 @@ bool checkDistance() {
 }
 
 void main(void) {
-    if (checkDistance() && sTexture(texture, texCoord).r == 1) {
+    if (checkDistance() && sTexture(u_texture, texCoord).r == 1) {
         fragColour = vec4(1);
     } else {
         fragColour = vec4(0);

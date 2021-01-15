@@ -12,7 +12,7 @@ out vec3 fragColour;
 
 in vec2 texCoord;
 
-uniform sampler2D texture;
+uniform sampler2D u_texture;
 
 float getBrightness(vec3 colour) {
     //return (colour.x + colour.y + colour.z) / 3;
@@ -21,7 +21,7 @@ float getBrightness(vec3 colour) {
 
 void main(void) {
     /*
-    vec3 colour = sTexture(texture, texCoord).rgb;
+    vec3 colour = sTexture(u_texture, texCoord).rgb;
     float brightness = getBrightness(colour);
 
     brightness = brightness * levels;
@@ -31,7 +31,7 @@ void main(void) {
 
     fragColour = colour;*/
 
-    vec3 colour = sTexture(texture, texCoord).rgb;
+    vec3 colour = sTexture(u_texture, texCoord).rgb;
     colour *= levels;
     colour.x = int(colour.x) + .5;
     colour.y = int(colour.y) + .5;

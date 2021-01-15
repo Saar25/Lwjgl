@@ -16,7 +16,7 @@ class MinColour constructor(r: Float, g: Float, b: Float)
     val minColour: Vector3f = Vector3.of(r, g, b)
 
     init {
-        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("texture", 0) {
+        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<RenderOutputData>): ITexture {
                 return state.instance.colour
             }

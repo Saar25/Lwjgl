@@ -10,7 +10,7 @@ import opengl.textures.ITexture
 class Sun(var radius: Float = .1f, var center: Vector2f = Vector2.of(.5f)) : AbstractPostProcessor(FRAG_FILE) {
 
     init {
-        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("texture", 0) {
+        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<RenderOutputData>): ITexture {
                 return state.instance.depth
             }

@@ -10,7 +10,7 @@ import opengl.textures.Texture
 class Contrast(var factor: Float = 1.4f) : AbstractPostProcessor(FRAG_FILE) {
 
     init {
-        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("texture", 0) {
+        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<RenderOutputData>): Texture {
                 return state.instance.colour
             }

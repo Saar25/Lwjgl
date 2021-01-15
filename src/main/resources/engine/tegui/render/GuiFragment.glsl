@@ -27,7 +27,7 @@
 /* ===================== */
 
     uniform bool hasTexture;
-    uniform sampler2D texture;
+    uniform sampler2D u_texture;
     uniform ivec2 windowSize;
     uniform vec4 radiuses;
     uniform uint borderColour;
@@ -183,7 +183,7 @@ bool isInside(vec4 bounds) {
 */
 vec4 getColour() {
     if (hasTexture) {
-        vec4 colour = sTexture(texture, v_position);
+        vec4 colour = sTexture(u_texture, v_position);
         return mix(v_backgroundColour, colour, colour.a);
     }
     return v_backgroundColour * colourModifier;

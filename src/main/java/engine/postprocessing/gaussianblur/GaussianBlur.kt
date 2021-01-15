@@ -23,7 +23,7 @@ class GaussianBlur(private var stages: Int, private val scale: Float) : Abstract
     private val verticalBlur = Uniform.createBool(shadersProgram, "verticalBlur")
 
     init {
-        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("texture", 0) {
+        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<RenderOutputData>): Texture {
                 return state.instance.colour
             }

@@ -16,7 +16,7 @@ out vec4 fragColour;
 
 in vec2 texCoord;
 
-uniform sampler2D texture;
+uniform sampler2D u_texture;
 uniform bool verticalBlur;
 uniform int width;
 uniform int height;
@@ -26,7 +26,7 @@ vec4 doVerticalBlur() {
     float offset = 1.0 / width;
     for (int x = -hlevels ; x <= hlevels ; x++) {
         vec2 coord = texCoord + vec2(x * offset, 0);
-        colour += blurLevels[x + hlevels] * sTexture(texture, coord);
+        colour += blurLevels[x + hlevels] * sTexture(u_texture, coord);
     }
     return colour;
 }
@@ -36,7 +36,7 @@ vec4 doHorizontalBlur() {
     float offset = 1.0 / height;
     for (int y = -hlevels ; y <= hlevels ; y++) {
         vec2 coord = texCoord + vec2(0, y * offset);
-        colour += blurLevels[y + hlevels] * sTexture(texture, coord);
+        colour += blurLevels[y + hlevels] * sTexture(u_texture, coord);
     }
     return colour;
 }

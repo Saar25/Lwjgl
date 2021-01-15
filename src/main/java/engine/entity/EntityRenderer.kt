@@ -110,7 +110,7 @@ internal class EntityRenderer : Renderer3D<Entity>() {
                 return state.instance.skin.textureOffset
             }
         })
-        shadersProgram.addPerInstanceUniform(object : UniformTextureProperty<Entity>("texture", 0) {
+        shadersProgram.addPerInstanceUniform(object : UniformTextureProperty<Entity>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<Entity>): ITexture? {
                 return state.instance.skin.texture
             }

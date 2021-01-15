@@ -20,7 +20,7 @@ class RadialBlur(var samples: Int = 50, var factor: Float = 2f) : AbstractPostPr
     }
 
     init {
-        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("texture", 0) {
+        shadersProgram.addPerRenderUniform(object : UniformTextureProperty<RenderOutputData>("u_texture", 0) {
             override fun getUniformValue(state: RenderState<RenderOutputData>): ITexture {
                 return state.instance.colour
             }

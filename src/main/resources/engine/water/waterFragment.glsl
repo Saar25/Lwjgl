@@ -3,6 +3,12 @@
 */
 #version 400 core
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 #define MAX_LIGHTS 10
 const float distortionPower = 0.03;
 const float specularPower = 50.0;
@@ -89,13 +95,13 @@ float calculateMurkiness(float waterDepth) {
 
 float toLinearDepth(float depth) {
     return 2.0 * nearPlane * farPlane / (farPlane + nearPlane -
-        (2 * depth - 1) * (farPlane - nearPlane));
+    (2 * depth - 1) * (farPlane - nearPlane));
 }
 
 float calculateWaterDepth(vec2 texCoords) {
     if (hasTexture(2)) {
         float waterDistance = toLinearDepth(gl_FragCoord.z);
-        float depth = texture(depthTexture, texCoords).r;
+        float depth = sTexture(depthTexture, texCoords).r;
         float floorDistance = toLinearDepth(depth);
         return floorDistance - waterDistance;
     }
@@ -105,7 +111,7 @@ float calculateWaterDepth(vec2 texCoords) {
 vec2 distorteTexCoord(vec2 texCoord) {
     if (hasTexture(4)) {
         vec2 coords = vec2(texCoord.x + distortionOffset, texCoord.y);
-        vec2 distorted = texture(dudvMap, coords).rg * 0.1;
+        vec2 distorted = sTexture(dudvMap, coords).rg * 0.1;
         return texCoord + distorted * (distortionPower + 1);
     }
     return vec2(0);
@@ -113,7 +119,7 @@ vec2 distorteTexCoord(vec2 texCoord) {
 
 vec2 calculateDistortion(vec2 texCoord, float depthFactor) {
     if (hasTexture(4)) {
-        vec2 distortion = texture(dudvMap, texCoord).rg * 2.0 - 1.0;
+        vec2 distortion = sTexture(dudvMap, texCoord).rg * 2.0 - 1.0;
         return distortion * distortionPower * clamp(depthFactor / 20, 0, 1);
     }
     return vec2(0);
@@ -121,7 +127,7 @@ vec2 calculateDistortion(vec2 texCoord, float depthFactor) {
 
 vec3 calculateDistortedNormal(vec2 distortedTexCoord) {
     if (hasTexture(3)) {
-        vec3 distortedNormal = texture(normalsMap, distortedTexCoord).rbg;
+        vec3 distortedNormal = sTexture(normalsMap, distortedTexCoord).rbg;
         distortedNormal = distortedNormal * vec3(2, 1.7, 2) - vec3(1, 0, 1);
         return normalize(distortedNormal);
     }
@@ -136,7 +142,7 @@ vec3 calculateReflectionColour(vec2 ndc, vec2 distortion) {
     if (hasTexture(0)) {
         vec2 reflectionCoord = vec2(ndc.x, 1 - ndc.y) + distortion + coordsShift();
         reflectionCoord = clamp(reflectionCoord, 0.001, 0.999);
-        return texture(reflectionTexture, reflectionCoord).rgb;
+        return sTexture(reflectionTexture, reflectionCoord).rgb;
     }
     return waterColour;
 }
@@ -145,7 +151,7 @@ vec3 calculateRefractionColour(vec2 ndc, vec2 distortion) {
     if (hasTexture(1)) {
         vec2 refractionCoord = ndc + distortion + coordsShift();
         refractionCoord = clamp(refractionCoord, 0.001, 0.999);
-        return texture(refractionTexture, refractionCoord).rgb;
+        return sTexture(refractionTexture, refractionCoord).rgb;
     }
     return waterColour;
 }

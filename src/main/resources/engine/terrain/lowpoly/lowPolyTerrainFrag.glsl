@@ -3,6 +3,12 @@
 */
 #version 400 core
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 const int pcf = 3; // Percentage Closer Filtering
 const float pixels = pow(pcf * 2 + 1, 2);
 const float pixelSize = 1 / 8192.0;
@@ -50,12 +56,12 @@ float calcShadowFactor() {
     }
     float shadowFactor = 1;
     for (int x = -pcf; x <= pcf; x++){
-        if (v_shadowHCoords.z > texture(shadowMap, v_shadowHCoords.xy + vec2(x, x) * pixelSize).r + shadowBias) {
+        if (v_shadowHCoords.z > sTexture(shadowMap, v_shadowHCoords.xy + vec2(x, x) * pixelSize).r + shadowBias) {
             shadowFactor -= shadowPower * v_shadowHCoords.w / pixels;
         }
     }
     for (int y = -pcf; y <= pcf; y++){
-        if (v_shadowHCoords.z > texture(shadowMap, v_shadowHCoords.xy + vec2(-y, y) * pixelSize).r + shadowBias) {
+        if (v_shadowHCoords.z > sTexture(shadowMap, v_shadowHCoords.xy + vec2(-y, y) * pixelSize).r + shadowBias) {
             shadowFactor -= shadowPower * v_shadowHCoords.w / pixels;
         }
     }
@@ -64,7 +70,7 @@ float calcShadowFactor() {
     }
     for (int x = -pcf; x <= pcf; x++){
         for (int y = -pcf; y <= pcf; y++){
-            if (x != y && y != -x && v_shadowHCoords.z > texture(shadowMap, v_shadowHCoords.xy + vec2(x, y) * pixelSize).r + shadowBias) {
+            if (x != y && y != -x && v_shadowHCoords.z > sTexture(shadowMap, v_shadowHCoords.xy + vec2(x, y) * pixelSize).r + shadowBias) {
                 shadowFactor -= shadowPower * v_shadowHCoords.w / pixels;
             }
         }

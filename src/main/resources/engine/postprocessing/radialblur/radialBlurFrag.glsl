@@ -1,5 +1,11 @@
 #version 400
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 out vec3 fragColour;
 
 in vec2 texCoord;
@@ -19,7 +25,7 @@ void main(void) {
     vec3 finalColour = vec3(0);
     for(int i = 0; i < samples; i++) {
         vec2 coords = clamp(texCoord + i * offset, 0, 1);
-        finalColour += texture(texture, coords).rgb / samples;
+        finalColour += sTexture(texture, coords).rgb / samples;
     }
     fragColour = finalColour;
 }

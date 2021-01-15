@@ -1,5 +1,11 @@
 #version 400
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 const int pcf = 5; // Percentage Closer Filtering
 const float pixels = pow(pcf * 2 + 1, 2);
 const float pixelSize = 1 / 4096.0;
@@ -41,10 +47,10 @@ float calcShadowFactor(sampler2D shadowMap, vec4 shadowCoords) {
     }
     float shadowFactor = 1;
     for (int i = -pcf; i <= pcf; i++){
-        if (shadowCoords.z > texture(shadowMap, shadowCoords.xy + vec2(+i, +i) * pixelSize).r + shadowBias) {
+        if (shadowCoords.z > sTexture(shadowMap, shadowCoords.xy + vec2(+i, +i) * pixelSize).r + shadowBias) {
             shadowFactor -= shadowPower * shadowCoords.w / pixels;
         }
-        if (shadowCoords.z > texture(shadowMap, shadowCoords.xy + vec2(-i, +i) * pixelSize).r + shadowBias && i != 0) {
+        if (shadowCoords.z > sTexture(shadowMap, shadowCoords.xy + vec2(-i, +i) * pixelSize).r + shadowBias && i != 0) {
             shadowFactor -= shadowPower * shadowCoords.w / pixels;
         }
     }
@@ -53,7 +59,7 @@ float calcShadowFactor(sampler2D shadowMap, vec4 shadowCoords) {
     }
     for (int x = -pcf; x <= pcf; x++){
         for (int y = -pcf; y <= pcf; y++){
-            if (x != y && y != -x && shadowCoords.z > texture(shadowMap, shadowCoords.xy + vec2(x, y) * pixelSize).r + shadowBias) {
+            if (x != y && y != -x && shadowCoords.z > sTexture(shadowMap, shadowCoords.xy + vec2(x, y) * pixelSize).r + shadowBias) {
                 shadowFactor -= shadowPower * shadowCoords.w / pixels;
             }
         }
@@ -62,8 +68,8 @@ float calcShadowFactor(sampler2D shadowMap, vec4 shadowCoords) {
 }
 
 void main(void) {
-    vec3 colour = texture(colourTexture, texCoord).rgb;
-    float depth = texture(depthTexture, texCoord).r;
+    vec3 colour = sTexture(colourTexture, texCoord).rgb;
+    float depth = sTexture(depthTexture, texCoord).r;
     vec3 position = getWorldPosition(depth);
 
     float distance = distance(cameraPosition, position);

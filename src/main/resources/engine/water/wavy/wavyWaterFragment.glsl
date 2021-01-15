@@ -3,6 +3,12 @@
 */
 #version 400 core
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 #define MAX_LIGHTS 10
 
 const vec3 UP = vec3(0, 1, 0);
@@ -90,7 +96,7 @@ float toLinearDepth(float depth) {
 float calculateWaterDepth(vec2 texCoords) {
     if (hasTexture(2)) {
         float waterDistance = toLinearDepth(gl_FragCoord.z);
-        float depth = texture(depthTexture, texCoords).r;
+        float depth = sTexture(depthTexture, texCoords).r;
         float floorDistance = toLinearDepth(depth);
         return floorDistance - waterDistance;
     }
@@ -101,7 +107,7 @@ vec3 calculateReflectionColour(vec2 ndc) {
     if (hasTexture(0)) {
         vec2 reflectionCoord = vec2(ndc.x, 1 - ndc.y);
         reflectionCoord = clamp(reflectionCoord, 0.001, 0.999);
-        return texture(reflectionTexture, reflectionCoord).rgb;
+        return sTexture(reflectionTexture, reflectionCoord).rgb;
     }
     return waterColour;
 }
@@ -110,7 +116,7 @@ vec3 calculateRefractionColour(vec2 ndc) {
     if (hasTexture(1)) {
         vec2 refractionCoord = ndc;
         refractionCoord = clamp(refractionCoord, 0.001, 0.999);
-        return texture(refractionTexture, refractionCoord).rgb;
+        return sTexture(refractionTexture, refractionCoord).rgb;
     }
     return waterColour;
 }

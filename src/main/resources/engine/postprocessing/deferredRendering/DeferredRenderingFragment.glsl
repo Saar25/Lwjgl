@@ -1,5 +1,11 @@
 #version 400
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 out vec3 fragColour;
 
 in vec2 texCoord;
@@ -34,14 +40,14 @@ float getLinearDepth(float depth) {
 
 void main(void) {
     int index = int(texCoord.x * 2) * 2 + int(texCoord.y * 2);
-    float depthValue = texture(depth, texCoord * 2).r;
+    float depthValue = sTexture(depth, texCoord * 2).r;
     if (depthValue == 1) index = 4;
     switch (index) {
         case 0:
-            fragColour = texture(albedo, texCoord * 2).rgb;
+            fragColour = sTexture(albedo, texCoord * 2).rgb;
             break;
         case 1:
-            fragColour = texture(normal, texCoord * 2).rgb;
+            fragColour = sTexture(normal, texCoord * 2).rgb;
             break;
         case 2:
             fragColour = vec3(getLinearDepth(depthValue) / 500);
@@ -53,13 +59,13 @@ void main(void) {
             fragColour = vec3(0);
     }
 
-    depthValue = texture(depth, texCoord).r;
+    depthValue = sTexture(depth, texCoord).r;
     switch (u_index % 4) {
         case 0:
-            fragColour = texture(albedo, texCoord).rgb;
+            fragColour = sTexture(albedo, texCoord).rgb;
             break;
         case 1:
-            fragColour = texture(normal, texCoord).rgb;
+            fragColour = sTexture(normal, texCoord).rgb;
             break;
         case 2:
             if (depthValue == 1) fragColour = vec3(0);

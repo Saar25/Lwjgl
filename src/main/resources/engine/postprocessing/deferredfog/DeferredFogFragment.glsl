@@ -1,5 +1,11 @@
 #version 400
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 struct Fog {
     float minDistance;
     float maxDistance;
@@ -33,10 +39,10 @@ vec3 getViewPosition(float depth) {
 }
 
 void main(void) {
-    float depth = texture(depthTexture, texCoord).r;
+    float depth = sTexture(depthTexture, texCoord).r;
     float distance = length(getViewPosition(depth));
     float visibility = calculateVisibility(distance);
-    vec3 colour = texture(colourTexture, texCoord).rgb;
+    vec3 colour = sTexture(colourTexture, texCoord).rgb;
 
     fragColour = mix(fog.colour, colour, visibility);
 }

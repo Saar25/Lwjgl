@@ -1,5 +1,11 @@
 #version 400
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 out vec4 fragColour;
 
 in vec2 texCoord;
@@ -17,7 +23,7 @@ bool checkDistance() {
 }
 
 void main(void) {
-    if (checkDistance() && texture(texture, texCoord).r == 1) {
+    if (checkDistance() && sTexture(texture, texCoord).r == 1) {
         fragColour = vec4(1);
     } else {
         fragColour = vec4(0);

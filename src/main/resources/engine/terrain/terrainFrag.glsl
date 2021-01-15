@@ -3,6 +3,12 @@
 */
 #version 400 core
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 #define MAX_LIGHTS 10
 #define HEIGHT_BIOMES 3
 
@@ -104,7 +110,7 @@ vec3 calcFinalLights(Light[MAX_LIGHTS] light, int lightsCount,
 }
 
 vec4 calcTextureColour(float tiling) {
-    return texture(texture, outTexCoord * tiling);
+    return sTexture(texture, outTexCoord * tiling);
 }
 
 vec4 calcLowPolyColour(float height) {
@@ -124,12 +130,12 @@ float calcShadowFactor(sampler2D shadowMap, vec4 shadowMapCoords) {
     }
     float shadowFactor = 1;
     for (int x = -pcf; x <= pcf; x++){
-        if (shadowMapCoords.z > texture(shadowMap, shadowMapCoords.xy + vec2(x, x) * pixelSize).r + shadowBias) {
+        if (shadowMapCoords.z > sTexture(shadowMap, shadowMapCoords.xy + vec2(x, x) * pixelSize).r + shadowBias) {
             shadowFactor -= shadowPower * shadowMapCoords.w / pixels;
         }
     }
     for (int y = -pcf; y <= pcf; y++){
-        if (shadowMapCoords.z > texture(shadowMap, shadowMapCoords.xy + vec2(-y, y) * pixelSize).r + shadowBias) {
+        if (shadowMapCoords.z > sTexture(shadowMap, shadowMapCoords.xy + vec2(-y, y) * pixelSize).r + shadowBias) {
             shadowFactor -= shadowPower * shadowMapCoords.w / pixels;
         }
     }
@@ -138,7 +144,7 @@ float calcShadowFactor(sampler2D shadowMap, vec4 shadowMapCoords) {
     }
     for (int x = -pcf; x <= pcf; x++){
         for (int y = -pcf; y <= pcf; y++){
-            if (x != y && y != -x && shadowMapCoords.z > texture(shadowMap, shadowMapCoords.xy + vec2(x, y) * pixelSize).r + shadowBias) {
+            if (x != y && y != -x && shadowMapCoords.z > sTexture(shadowMap, shadowMapCoords.xy + vec2(x, y) * pixelSize).r + shadowBias) {
                 shadowFactor -= shadowPower * shadowMapCoords.w / pixels;
             }
         }

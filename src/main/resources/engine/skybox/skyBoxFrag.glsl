@@ -3,6 +3,12 @@
 */
 #version 400 core
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 const float skyFactor = 0.4;
 const float fogTransition = 0.1;
 const float fogStart = 0.01;
@@ -21,7 +27,7 @@ float calculateFogFactor() {
 }
 
 void main() {
-    fragColour = texture(cubeMap, texCoord);
+    fragColour = sTexture(cubeMap, texCoord);
 
     float fogFactor = calculateFogFactor();
     fragColour = mix(fragColour, vec4(skyColour, 1), skyFactor);

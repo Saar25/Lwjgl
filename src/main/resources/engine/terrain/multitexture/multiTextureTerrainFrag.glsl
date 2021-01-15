@@ -3,6 +3,12 @@
 */
 #version 400 core
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 #define MAX_LIGHTS 10
 
 const int pcf = 3; // Percentage Closer Filtering
@@ -93,12 +99,12 @@ vec3 calcFinalLights(Light[MAX_LIGHTS] light, int lightsCount,
 }
 
 vec4 calculateColour(vec2 blendTexCoords, vec2 texCoords) {
-    vec4 blend = texture(blendMap , blendTexCoords);
+    vec4 blend = sTexture(blendMap , blendTexCoords);
     float dFactor = (1 - (blend.r + blend.g + blend.b));
-    vec4 rColour = blend.r == 0 ? vec4(0) : blend.r * texture(rTexture, texCoords); // if texture is not shown on
-    vec4 gColour = blend.g == 0 ? vec4(0) : blend.g * texture(gTexture, texCoords); // the blend map then texture
-    vec4 bColour = blend.b == 0 ? vec4(0) : blend.b * texture(bTexture, texCoords); // sampling is useless and
-    vec4 dColour = dFactor == 0 ? vec4(0) : dFactor * texture(dTexture, texCoords); // will surely be zero
+    vec4 rColour = blend.r == 0 ? vec4(0) : blend.r * sTexture(rTexture, texCoords); // if texture is not shown on
+    vec4 gColour = blend.g == 0 ? vec4(0) : blend.g * sTexture(gTexture, texCoords); // the blend map then texture
+    vec4 bColour = blend.b == 0 ? vec4(0) : blend.b * sTexture(bTexture, texCoords); // sampling is useless and
+    vec4 dColour = dFactor == 0 ? vec4(0) : dFactor * sTexture(dTexture, texCoords); // will surely be zero
     return dColour + rColour + gColour + bColour;
 }
 
@@ -108,12 +114,12 @@ float calculateShadowFactor() {
     }
     float shadowFactor = 1;
     for (int x = -pcf; x <= pcf; x++){
-        if (v_shadowHCoords.z > texture(shadowMap, v_shadowHCoords.xy + vec2(x, x) * pixelSize).r + shadowBias) {
+        if (v_shadowHCoords.z > sTexture(shadowMap, v_shadowHCoords.xy + vec2(x, x) * pixelSize).r + shadowBias) {
             shadowFactor -= shadowPower * v_shadowHCoords.w / pixels;
         }
     }
     for (int y = -pcf; y <= pcf; y++){
-        if (v_shadowHCoords.z > texture(shadowMap, v_shadowHCoords.xy + vec2(-y, y) * pixelSize).r + shadowBias) {
+        if (v_shadowHCoords.z > sTexture(shadowMap, v_shadowHCoords.xy + vec2(-y, y) * pixelSize).r + shadowBias) {
             shadowFactor -= shadowPower * v_shadowHCoords.w / pixels;
         }
     }
@@ -122,7 +128,7 @@ float calculateShadowFactor() {
     }
     for (int x = -pcf; x <= pcf; x++){
         for (int y = -pcf; y <= pcf; y++){
-            if (x != y && y != -x && v_shadowHCoords.z > texture(shadowMap, v_shadowHCoords.xy + vec2(x, y) * pixelSize).r + shadowBias) {
+            if (x != y && y != -x && v_shadowHCoords.z > sTexture(shadowMap, v_shadowHCoords.xy + vec2(x, y) * pixelSize).r + shadowBias) {
                 shadowFactor -= shadowPower * v_shadowHCoords.w / pixels;
             }
         }

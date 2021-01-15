@@ -1,5 +1,11 @@
 #version 400
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 out vec4 fragColour;
 
 in vec2 texCoord;
@@ -11,12 +17,12 @@ void main(void) {
     const float eps = .005;
     const float minDot = .95;
 
-    vec3 up = normalize(texture(normal, texCoord + vec2(0, +eps)).rgb);
-    vec3 down = normalize(texture(normal, texCoord + vec2(0, -eps)).rgb);
-    vec3 right = normalize(texture(normal, texCoord + vec2(+eps, 0)).rgb);
-    vec3 left = normalize(texture(normal, texCoord + vec2(-eps, 0)).rgb);
+    vec3 up = normalize(sTexture(normal, texCoord + vec2(0, +eps)).rgb);
+    vec3 down = normalize(sTexture(normal, texCoord + vec2(0, -eps)).rgb);
+    vec3 right = normalize(sTexture(normal, texCoord + vec2(+eps, 0)).rgb);
+    vec3 left = normalize(sTexture(normal, texCoord + vec2(-eps, 0)).rgb);
 
-    vec3 normal = normalize(texture(normal, texCoord).rgb);
+    vec3 normal = normalize(sTexture(normal, texCoord).rgb);
 
     float dot1 = dot(normal, up);
     float dot2 = dot(normal, down);
@@ -30,7 +36,7 @@ void main(void) {
     if (flags != bvec4(true)) {
         fragColour = vec4(0, 0, 0, 1);
     } else {
-        fragColour = texture(albedo, texCoord);
+        fragColour = sTexture(albedo, texCoord);
     }
 
 }

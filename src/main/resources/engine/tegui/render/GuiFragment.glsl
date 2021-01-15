@@ -1,5 +1,11 @@
 #version 400
 
+#if __VERSION__ < 130
+#define sTexture texture2D
+#else
+#define sTexture texture
+#endif
+
 /* ====================== */
 /*                        */
 /*   IN / OUT VARIABLES   */
@@ -177,7 +183,7 @@ bool isInside(vec4 bounds) {
 */
 vec4 getColour() {
     if (hasTexture) {
-        vec4 colour = texture(texture, v_position);
+        vec4 colour = sTexture(texture, v_position);
         return mix(v_backgroundColour, colour, colour.a);
     }
     return v_backgroundColour * colourModifier;

@@ -37,7 +37,7 @@ public final class TextureLoader {
      * @throws Exception if could not load the image
      */
     private static TextureInfo decodePng(String textureFile) throws Exception {
-        PNGDecoder decoder = new PNGDecoder(Class.class.getResourceAsStream(textureFile));
+        PNGDecoder decoder = new PNGDecoder(TextureLoader.class.getResourceAsStream(textureFile));
 
         ByteBuffer textureBuffer = MemoryUtils.allocByte(4 * decoder.getWidth() * decoder.getHeight());
         decoder.decode(textureBuffer, decoder.getWidth() * 4, PNGDecoder.Format.RGBA);

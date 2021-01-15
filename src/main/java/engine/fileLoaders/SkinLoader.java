@@ -78,7 +78,7 @@ public final class SkinLoader {
      * @throws Exception if could not load the image
      */
     private static Info decodePng(String textureFile) throws Exception {
-        PNGDecoder decoder = new PNGDecoder(Class.class.getResourceAsStream(textureFile));
+        PNGDecoder decoder = new PNGDecoder(SkinLoader.class.getResourceAsStream(textureFile));
 
         ByteBuffer textureBuffer = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
         decoder.decode(textureBuffer, decoder.getWidth() * 4, PNGDecoder.Format.RGBA);

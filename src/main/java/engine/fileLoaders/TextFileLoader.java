@@ -15,7 +15,7 @@ public final class TextFileLoader {
 
     public static String loadResource(String fileName) throws Exception {
         String result;
-        try (InputStream in = Class.class.getResourceAsStream(fileName);
+        try (InputStream in = TextFileLoader.class.getResourceAsStream(fileName);
              Scanner scanner = new Scanner(in, "UTF-8")) {
             result = scanner.useDelimiter("\\A").next();
         }
@@ -24,7 +24,7 @@ public final class TextFileLoader {
 
     public static List<String> readAllLines(String fileName) throws Exception {
         List<String> list = new LinkedList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(Class.class.getResourceAsStream(fileName)))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(TextFileLoader.class.getResourceAsStream(fileName)))) {
             String line;
             while ((line = br.readLine()) != null) {
                 list.add(line);

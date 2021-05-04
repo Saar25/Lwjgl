@@ -4,6 +4,14 @@ Full showcase of the engine:
 
 https://www.youtube.com/watch?v=OyHHbpGA1iE
 
+# How to build
+Make sure you have java 8, and you can run maven
+
+```
+mvn clean package
+java -jar target/Lwjgl-1.0-SNAPSHOT.jar
+```
+
 # Features
 
 Here are some main features of the engine:

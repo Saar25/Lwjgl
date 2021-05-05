@@ -1,9 +1,9 @@
 #version 400
 
-const float positions[8] = {
+const float positions[8] = float[](
     -0.5f, +0.5f, -0.5f, -0.5f,
     +0.5f, +0.5f, +0.5f, -0.5f
-};
+);
 
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec2 scaleAge;
